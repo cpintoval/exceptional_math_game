@@ -1,6 +1,7 @@
 # This file contains the actual logic of the Math Game
 require './player'
 require './invalid_guess_error'
+require './invalid_name_error'
 
 # Initializing player's lives
 @players = [ Player.new("Player 1", 1), Player.new("Player 2", 2)]
@@ -37,7 +38,7 @@ def verify_answer(answer)
   if !(/\A[-+]?\d+\z/ === answer)
     raise InvalidGuessError, "Guess is not an Integer"
   end
-  
+
   answer = answer.to_i
   output = @actual_answer == answer
   if output
@@ -46,6 +47,16 @@ def verify_answer(answer)
     @players[@actual_player - 1].lose_life
   end
   output
+end
+
+def verify_name(name)
+
+  if name == ""
+    raise InvalidNameError, "Empty name received"
+  end
+
+  true
+
 end
 
 def next_turn

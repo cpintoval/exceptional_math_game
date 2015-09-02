@@ -34,14 +34,32 @@ end
 
 puts "************************  Multiplayer Math Game  ************************".yellow
 puts "- Let's start by selecting your names..."
-puts "- Player 1 enter your name: "
-p1_name = gets.chomp
-@players[0].name = p1_name != "" ? p1_name : "Player 1"
-puts "- Welcome to the game #{@players[0].name}!"
-puts "- Player 2 enter your name: "
-p2_name = gets.chomp
-@players[1].name = p2_name != "" ? p2_name : "Player 2"
-puts "- Welcome to the game #{@players[1].name}!"
+while true
+  begin
+    puts "- Player 1 enter your name: "
+    p1_name = gets.chomp
+    verify_name(p1_name)
+    @players[0].name = p1_name
+    puts "- Welcome to the game #{@players[0].name}!"
+    break
+  rescue Exception => e
+    puts "#{e.class}: #{e.message} - Try again".red
+  end
+end
+
+while true
+  begin
+    puts "- Player 2 enter your name: "
+    p2_name = gets.chomp
+    verify_name(p2_name)
+    @players[1].name = p2_name
+    puts "- Welcome to the game #{@players[1].name}!"
+    break
+  rescue Exception => e
+    puts "#{e.class}: #{e.message} - Try again".red
+  end
+end
+
 while true
   play
   puts "- Wanna play again? (yes/no)".yellow
