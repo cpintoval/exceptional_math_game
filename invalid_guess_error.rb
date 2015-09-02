@@ -1,0 +1,2 @@
+class InvalidGuessError < StandardError
+end
